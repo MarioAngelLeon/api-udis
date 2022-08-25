@@ -20,7 +20,7 @@ const udisCreate = async ( req = request, res = response) =>{
         const { initPeriod, endPeriod } = dateIntervals( day ); 
         
         const udis = await UDI.findAll({ where: {
-            fecha:{
+            date:{
                 [Op.between] : [initPeriod, endPeriod]
             }
         }});

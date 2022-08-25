@@ -1,6 +1,6 @@
 const udiAdapter = ( fecha, dato) =>{
     return{
-        fecha, dato
+        date: fecha, dato
     }
 }
 
