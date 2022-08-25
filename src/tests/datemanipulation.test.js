@@ -4,9 +4,9 @@ test('Should get the day from the current date', () => {
 
     const day = getDayFromMoment();
 
-    expect( day ).toBe(24);
+    expect( day ).toBe(25);
 
-    expect( day ).not.toBe()
+    expect( day ).not.toBe(undefined)
 
 });
 
@@ -16,7 +16,6 @@ test('Should yield two date ranges', () => {
 
     const keys = Object.keys(periods);
 
-    console.log(keys)
     expect( keys ).toEqual(['initPeriod', 'endPeriod'])
 
 });

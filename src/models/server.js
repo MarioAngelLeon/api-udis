@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 
+// Adding swagger to api
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('../../swagger.json');
+
 const DBConnection = require('../db/DBConnection');
 
 class Server {
@@ -30,6 +34,9 @@ class Server {
 
         // Middleware para el cors
         this.app.use(cors());
+
+        //Se añade documentación para swagger
+        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
     }
 

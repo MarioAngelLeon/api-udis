@@ -1,22 +1,36 @@
 const { request, response } = require('express');
 const { UDIService } = require('../services/banxico.service');
+const { Op } = require('sequelize');
 const { getDayFromMoment, dateIntervals, formatData } = require('../helpers');
 const moment = require('moment');
 const UDI = require('../models/udi.model');
 
 const udisCreate = async ( req = request, res = response) =>{
+    
     try{
 
         const day = getDayFromMoment();
 
-        if( day !== 24 && day !== 10 ){
+        if( day !== 25 && day !== 10 ){
             return res.status(200).json({
                 msg: 'UDIs are alredy saved on BD',
-            })
+            });
         }
         
         const { initPeriod, endPeriod } = dateIntervals( day ); 
-    
+        
+        const udis = await UDI.findAll({ where: {
+            fecha:{
+                [Op.between] : [initPeriod, endPeriod]
+            }
+        }});
+
+        if(udis.length !== 0){
+            return res.status(200).json({
+                msg: 'UDIs are alredy saved on BD',
+            });
+        }
+
         const response = await UDIService(initPeriod, endPeriod);
 
         const data = response?.data;
@@ -26,9 +40,8 @@ const udisCreate = async ( req = request, res = response) =>{
         const { datos } = series[0];
 
         const bulkData = formatData( datos );
-        const udi = await UDI.bulkCreate( bulkData );
-
-        console.log(udi);
+        await UDI.bulkCreate( bulkData );
+        
 
         res.status(201).json({
             msg: 'UDIS created succesfully',
@@ -43,9 +56,11 @@ const udisCreate = async ( req = request, res = response) =>{
         });
         
     }
+
 }
 
 const udisGet = async (req = request, res = response) =>{
+
     try{
 
         const { date } = req.params;
@@ -58,7 +73,7 @@ const udisGet = async (req = request, res = response) =>{
 
 
         const udi = await UDI.findOne({ where: { fecha: moment(date,'YYYY-MM-DD')} });
-
+        
 
         if(!udi){
             return res.status(404).json({
@@ -80,6 +95,7 @@ const udisGet = async (req = request, res = response) =>{
         });
         
     }
+
 }
 
 module.exports = { udisCreate, udisGet }

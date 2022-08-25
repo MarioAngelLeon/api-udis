@@ -1,0 +1,44 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "description" : "This is an api to save udis from banxico service",
+        "version":"1.0.0",
+        "title":"UDIs write API",
+        "contact":{
+            "email" : "gerardo.molina@softtek.com"
+        }
+    },
+    "schemes":["http"],
+    "host":"localhost:3001",
+    "basePath":"/api/v1/udis/create",
+    "paths":{
+        "/":{
+            "post":{
+                "summary":"Save all udis in BD",
+                "description": "Save all udis in BD",
+                "produces": ["application/json"],
+                "parameters":[],
+                "responses":{
+                    "200": {
+                        "description": "Ya se encuentran generadas las udis para la fecha del día",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "201": {
+                        "description": "Se crearon los udis para la fecha del día",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "500": {
+                        "description": "Algo salió mal al realizar el proceso de guardado de udis",
+                        "schema": {
+                            "type": "array"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
