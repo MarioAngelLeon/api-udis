@@ -14,29 +14,48 @@
     "paths":{
         "/":{
             "post":{
-                "summary":"Save all udis in BD",
-                "description": "Save all udis in BD",
+                "summary":"Guarda las udis en BD obtenidas desde banxico",
+                "description": "Las udis a guardar, son aquellas que se adaptan bajo el mandato de publicación de los días 10 y 25 de cada mes.",
                 "produces": ["application/json"],
                 "parameters":[],
                 "responses":{
                     "200": {
-                        "description": "Ya se encuentran generadas las udis para la fecha del día",
+                        "description": "Ya se encuentran generadas las udis para la fecha del día, en dado caso que no sea 10 o 25",
                         "schema": {
-                            "type": "array"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/genericResponse"
+                            }
                         }
                     },
                     "201": {
-                        "description": "Se crearon los udis para la fecha del día",
+                        "description": "Se crearon los udis para la fecha del día 10 o 25",
                         "schema": {
-                            "type": "array"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/genericResponse"
+                            }
                         }
                     },
                     "500": {
                         "description": "Algo salió mal al realizar el proceso de guardado de udis",
                         "schema": {
-                            "type": "array"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/genericResponse"
+                            }
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions":{
+        "genericResponse":{
+            "type": "object",
+            "properties":{
+                "msg":{
+                    "type":"string"
                 }
             }
         }
