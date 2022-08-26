@@ -51,9 +51,9 @@ class Server {
     run(){
 
         this.app.listen(this.port, ()=>{
-            
+
             // Refrescando las tables en base de datos
-            DBConnection.sync({ alter: true }).then(res=>{
+            DBConnection.sync().then(res=>{
                 console.log('******* DB ONLINE **********')
             }).catch(error=>{
                 console.error('Error trying to start db ', error);
