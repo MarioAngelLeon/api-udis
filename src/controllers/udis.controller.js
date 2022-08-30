@@ -1,14 +1,14 @@
-const { request, response } = require('express');
-
-const { UDIService } = require('../services/banxico.service');
-const { getDayFromMoment, dateIntervals, formatData } = require('../commons');
-const { getUDIByDate, saveBulkUDIS, deleteUDISPeriods} = require('../dao/udi.dao');
-const { LOG } = require('../commons/logger');
+import { request, response } from 'express';
+import { UDIService } from '../services/banxico.service';
+import { getDayFromMoment, dateIntervals, formatData } from '../commons';
+import { getUDIByDate, saveBulkUDIS, deleteUDISPeriods } from '../dao/udi.dao';
+import { LOG } from '../commons/logger';
 
 const udisCreate = async ( req = request, res = response) =>{
     
     try{
         
+        LOG.debug('Inicia guardado de udis \n');
         LOG.debug('Entrando al controlador');
         const day = getDayFromMoment();
      
@@ -25,19 +25,23 @@ const udisCreate = async ( req = request, res = response) =>{
 
         LOG.debug('------------------------------------------------------');
         
-        LOG.debug('Inicia borrado de registros existentes para el periodo');
+        LOG.debug(`Inicia borrado de registros existentes para el periodo ${initPeriod} - ${endPeriod}`);
         //Eliminamos registros en el periodo para que no se dupliquen
         await deleteUDISPeriods(initPeriod, endPeriod);
-        LOG.debug('Termina borrado de registros existentes para el periodo');
+        LOG.debug(`Termina borrado de registros existentes para el periodo ${initPeriod} - ${endPeriod}`);
 
-        LOG.debug('Inicia guardado de registros existentes para el periodo');
+        LOG.debug('------------------------------------------------------');
+
+        LOG.debug(`Inicia guardado de registros existentes para el periodo ${initPeriod} - ${endPeriod}`);
         //Insertamos todos los registros obtenidos y formateados desde banxico, 
         //con bulkCreate, llamado desde el dao
         const bulkData = formatData( datos );
         await saveBulkUDIS( bulkData );
-        LOG.debug('Termina guardado de registros existentes para el periodo');
+        LOG.debug(`Termina guardado de registros existentes para el periodo ${initPeriod} - ${endPeriod}`);
         
         LOG.debug('Terminó todo el proceso en el controlador');
+        LOG.debug('Finaliza guardado de udis \n');
+        
         res.status(201).json({
             msg: 'UDIS created succesfully',
             from: initPeriod,

@@ -1,5 +1,4 @@
-const { Sequelize } = require('sequelize');
-
+import { Sequelize } from 'sequelize';
 
 const DBConnection = new Sequelize( 'MANGOSTA','root','Softtek82' ,{
 
@@ -8,4 +7,4 @@ const DBConnection = new Sequelize( 'MANGOSTA','root','Softtek82' ,{
     logging: false,
 });
 
-module.exports = DBConnection;
+module.exports =  DBConnection;

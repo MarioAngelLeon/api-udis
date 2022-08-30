@@ -1,5 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
-const DBConnection = require('../commons/DBConnection');
+import { Model, DataTypes } from 'sequelize';
+import { DBConnection } from '../commons';
+
 
 class UDI extends Model {}
 
@@ -35,4 +36,4 @@ UDI.init({
     
 });
 
-module.exports = UDI;
+module.exports =  UDI;

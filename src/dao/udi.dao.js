@@ -1,9 +1,6 @@
-const moment = require('moment');
-const { Op } = require('sequelize');
-
-const { UDI } = require('../models');
-
-
+import moment from 'moment';
+import { Op } from 'sequelize';
+import { UDI } from '../models';
 
 const saveBulkUDIS = async ( udis = [] ) =>{
     

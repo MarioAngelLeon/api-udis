@@ -5,13 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon src/app.js",
-    "start": "node src/app.js"
+    "dev": "nodemon --exec babel-node src/app.js",
+    "start": "babel-node src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/node": "^7.18.10",
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/register": "^7.18.9",
     "@newrelic/winston-enricher": "^4.0.0",
     "axios": "^0.27.2",
     "cors": "^2.8.5",

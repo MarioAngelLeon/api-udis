@@ -1,5 +1,5 @@
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
 
 // Adding swagger to api
 const swaggerUi = require('swagger-ui-express');
@@ -52,7 +52,7 @@ class Server {
 
         this.app.listen(this.port, ()=>{
 
-            // Refrescando las tables en base de datos
+            // Refrescando las tablas en base de datos
             DBConnection.sync().then(res=>{
                 console.log('******* DB ONLINE **********')
             }).catch(error=>{

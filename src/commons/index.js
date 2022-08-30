@@ -1,6 +1,3 @@
-const { dateIntervals, getDayFromMoment } = require('./datemanipulation');
-const { formatData } = require('./formatData');
-const DBConnection = require('./DBConnection');
-
-
-module.exports = { dateIntervals, getDayFromMoment, formatData, DBConnection }
+export * from './datemanipulation';
+export * from './formatData';
+export { default as DBConnection } from './DBConnection';

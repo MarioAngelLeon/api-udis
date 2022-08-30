@@ -1,5 +1,6 @@
-const { Router } = require('express');
-const { udisCreate, udisGet } = require('../controllers/udis.controller');
+
+import { Router } from 'express';
+import { udisCreate, udisGet } from '../controllers/udis.controller';
 
 const router = Router();
 

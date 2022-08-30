@@ -1,8 +1,10 @@
-const winston = require('winston');
-const  newrelicFormatter = require('@newrelic/winston-enricher');
-const time =  require('moment-timezone');
-const { TZ } = require('./constants');
-const path = require('path');
+import winston from 'winston';
+import newrelicFormatter from '@newrelic/winston-enricher';
+import time from 'moment-timezone';
+import path from 'path';
+
+import { TZ } from './constants';
+
 
 const { createLogger, format, transports } = winston;
 const newRelicForm = newrelicFormatter(winston);

@@ -1,5 +1,3 @@
-const UDI = require('./udi.model');
-const Error = require('./error.model');
+export { default as UDI } from './udi.model';
+export { default as Error } from './error.model';
 
-
-module.exports = { UDI, Error}

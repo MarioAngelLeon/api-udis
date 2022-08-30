@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
 const BASE_URL = 'https://www.banxico.org.mx/SieAPIRest/service/v1/series/SP68257/datos/';
 

@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const DBConnection = require('../commons/DBConnection');
+import { Model, DataTypes} from 'sequelize';
+import { DBConnection } from '../commons';
 
 class Error extends Model{}
 

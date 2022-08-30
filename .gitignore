@@ -1,2 +1,5 @@
 /node_modules
 /logs
+
+#Logs
+newrelic_agent.log
