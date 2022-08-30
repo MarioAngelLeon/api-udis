@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const DBConnection = require('../db/DBConnection');
+const DBConnection = require('../commons/DBConnection');
 
 class UDI extends Model {}
 

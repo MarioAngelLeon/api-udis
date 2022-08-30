@@ -1,55 +1,52 @@
 const { request, response } = require('express');
+
 const { UDIService } = require('../services/banxico.service');
-const { Op } = require('sequelize');
-const { getDayFromMoment, dateIntervals, formatData } = require('../helpers');
-const moment = require('moment');
-const UDI = require('../models/udi.model');
+const { getDayFromMoment, dateIntervals, formatData } = require('../commons');
+const { getUDIByDate, saveBulkUDIS, deleteUDISPeriods} = require('../dao/udi.dao');
+const { LOG } = require('../commons/logger');
 
 const udisCreate = async ( req = request, res = response) =>{
     
     try{
-
+        
+        LOG.debug('Entrando al controlador');
         const day = getDayFromMoment();
-
-        if( day !== 25 && day !== 10 ){
-            return res.status(200).json({
-                msg: 'UDIs are alredy saved on BD',
-            });
-        }
-        
+     
         const { initPeriod, endPeriod } = dateIntervals( day ); 
-        
-        const udis = await UDI.findAll({ where: {
-            date:{
-                [Op.between] : [initPeriod, endPeriod]
-            }
-        }});
-
-        if(udis.length !== 0){
-            return res.status(200).json({
-                msg: 'UDIs are alredy saved on BD',
-            });
-        }
-
+        LOG.debug('Entrando al servicio');
         const response = await UDIService(initPeriod, endPeriod);
-
+        LOG.debug('Terminando consulta de servicio - Empieza desestructuración de respuesta')
         const data = response?.data;
         const { bmx } = data;
         const { series } = bmx;
 
         const { datos } = series[0];
+        LOG.debug('Termina desestructuración de respuesta del servicio');
 
-        const bulkData = formatData( datos );
-        await UDI.bulkCreate( bulkData );
+        LOG.debug('------------------------------------------------------');
         
+        LOG.debug('Inicia borrado de registros existentes para el periodo');
+        //Eliminamos registros en el periodo para que no se dupliquen
+        await deleteUDISPeriods(initPeriod, endPeriod);
+        LOG.debug('Termina borrado de registros existentes para el periodo');
 
+        LOG.debug('Inicia guardado de registros existentes para el periodo');
+        //Insertamos todos los registros obtenidos y formateados desde banxico, 
+        //con bulkCreate, llamado desde el dao
+        const bulkData = formatData( datos );
+        await saveBulkUDIS( bulkData );
+        LOG.debug('Termina guardado de registros existentes para el periodo');
+        
+        LOG.debug('Terminó todo el proceso en el controlador');
         res.status(201).json({
             msg: 'UDIS created succesfully',
+            from: initPeriod,
+            to: endPeriod
         });
         
     }catch(error){
-        
-        console.error(error);
+    
+        LOG.debug('Ocurrió un error ', error);
         res.status(500).json({
             status: 500,
             msg: 'Error con la aplicación, contacte al administrador',
@@ -72,7 +69,7 @@ const udisGet = async (req = request, res = response) =>{
         }
 
 
-        const udi = await UDI.findOne({ where: { fecha: moment(date,'YYYY-MM-DD')} });
+        const udi = await getUDIByDate( date );
         
 
         if(!udi){

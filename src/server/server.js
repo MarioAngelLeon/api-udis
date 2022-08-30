@@ -5,7 +5,7 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('../../swagger.json');
 
-const DBConnection = require('../db/DBConnection');
+const DBConnection = require('../commons/DBConnection');
 
 class Server {
     

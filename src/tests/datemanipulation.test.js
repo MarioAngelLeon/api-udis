@@ -1,10 +1,10 @@
-const { getDayFromMoment, dateIntervals } = require('../helpers/');
+const { getDayFromMoment, dateIntervals } = require('../commons');
 
 test('Should get the day from the current date', () => {
 
     const day = getDayFromMoment();
 
-    expect( day ).toBe(26);
+    expect( day ).toBe(29);
 
     expect( day ).not.toBe(undefined)
 
