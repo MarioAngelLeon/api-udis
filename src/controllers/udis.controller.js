@@ -3,6 +3,10 @@ import { UDIService } from '../services/banxico.service';
 import { getDayFromMoment, dateIntervals, formatData } from '../commons';
 import { getUDIByDate, saveBulkUDIS, deleteUDISPeriods } from '../dao/udi.dao';
 import { LOG } from '../commons/logger';
+import { Response } from '../commons/response';
+
+
+const customResponse = new Response();
 
 const udisCreate = async ( req = request, res = response) =>{
     
@@ -42,20 +46,27 @@ const udisCreate = async ( req = request, res = response) =>{
         LOG.debug('Terminó todo el proceso en el controlador');
         LOG.debug('Finaliza guardado de udis \n');
         
-        res.status(201).json({
+        customResponse.createdResponse(res, {
             msg: 'UDIS created succesfully',
             from: initPeriod,
             to: endPeriod
         });
-        
     }catch(error){
     
-        LOG.debug('Ocurrió un error ', error);
-        res.status(500).json({
+        LOG.debug('*********************');
+        LOG.debug('Inicia handler error');
+
+        LOG.error(`message error: ${ error }`);
+
+        let data = {
             status: 500,
             msg: 'Error con la aplicación, contacte al administrador',
-        });
+        };
+
+        customResponse.internalServerErrorResponse( res, data );
         
+        LOG.debug('Termina handler error');
+        LOG.debug('*********************');
     }
 
 }
