@@ -1,8 +1,9 @@
 import moment from 'moment';
+import { TZ } from './constants';
 
 const getDayFromMoment = () =>{
     
-    const date = moment().format('YYYY/MM/DD');
+    const date = moment().tz(TZ).format('YYYY/MM/DD');
 
     const splitedDate = date.split('/');
   
@@ -17,12 +18,33 @@ const dateIntervals = ( day ) =>{
     let endPeriod;
 
     if(day >= 10 && day < 25){
-        console.log('Entró')
-        initPeriod = day === 10 ? moment().add(1,'days').format('YYYY-MM-DD') : moment().set('date', 10).format('YYYY-MM-DD');
-        endPeriod = moment(initPeriod,'YYYY-MM-DD').add(15, 'days').format('YYYY-MM-DD');
+
+        initPeriod = day === 10 ? moment().tz( TZ ).add(1,'days').format('YYYY-MM-DD') : moment().set('date', 10).format('YYYY-MM-DD');
+        endPeriod = moment(initPeriod,'YYYY-MM-DD').tz( TZ ).add(15, 'days').format('YYYY-MM-DD');
+
     }else{
-        initPeriod = day === 25 ?  moment().add(1,'days').format('YYYY-MM-DD') : moment().set('date', 26).format('YYYY-MM-DD');
-        endPeriod = moment(initPeriod, 'YYYY-MM-DD').add(1, 'month').set('date', 10).format('YYYY-MM-DD');
+
+        if( day === 25 ){
+
+            initPeriod = moment().tz( TZ ).add(1,'days').format('YYYY-MM-DD');
+
+        }else{
+
+            if(day < 10){
+                
+                initPeriod  = moment().tz( TZ ).subtract(1,'month').set('date', 26).format('YYYY-MM-DD');
+                
+            }else{
+                
+                initPeriod = moment().tz( TZ ).set('date', 26).format('YYYY-MM-DD');
+
+            }
+
+            endPeriod = moment(initPeriod, 'YYYY-MM-DD').tz( TZ ).add(1, 'month').set('date', 10).format('YYYY-MM-DD');
+
+        }
+        
+        
     }
 
     return { initPeriod, endPeriod }

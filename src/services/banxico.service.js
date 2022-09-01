@@ -1,9 +1,12 @@
 import axios from 'axios';
-
+import { LOG } from '../commons/logger';
 const BASE_URL = 'https://www.banxico.org.mx/SieAPIRest/service/v1/series/SP68257/datos/';
 
 const UDIService = (initDate = '2022-01-01', endDate='2022-05-20') =>{
     try{
+        
+        LOG.debug('********SERVICIO**********');
+        LOG.debug('Entrando al servicio');
         
         const config = {
             headers: {
@@ -11,8 +14,12 @@ const UDIService = (initDate = '2022-01-01', endDate='2022-05-20') =>{
             }
         }
         
-        const url = BASE_URL + `${initDate}/${endDate}`
-        
+        const url = BASE_URL + `${initDate}/${endDate}`;
+
+        LOG.debug(`Haciendo petición al servicio en la url ${url}`);
+        LOG.debug(`Terminando servicio`);
+        LOG.debug('********SERVICIO**********');
+
         return axios.get(url, config);
     }catch(error){
         console.error('Error trying to build UDIService', error);
