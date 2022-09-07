@@ -1,6 +1,6 @@
 import { request, response } from 'express';
 import { UDIService } from '../services/banxico.service';
-import { getDayFromMoment, dateIntervals, formatData } from '../commons';
+import { getDayFromMoment, dateIntervals, formatData, createMessageDate } from '../commons';
 import { getUDIByDate, saveBulkUDIS, deleteUDISPeriods } from '../dao/udi.dao';
 import { LOG } from '../commons/logger';
 import { Response } from '../commons/response';
@@ -83,9 +83,12 @@ const udisGet = async (req = request, res = response) =>{
             })
         }
 
-
-        const udi = await getUDIByDate( date );
+        let udi = await getUDIByDate( date );
         
+        const dateFounded = udi?.date;
+        
+        
+        const msg = createMessageDate( dateFounded, date);
 
         if(!udi){
             return res.status(404).json({
@@ -96,6 +99,7 @@ const udisGet = async (req = request, res = response) =>{
         res.status(200).json({
             msg: 'OK',
             data: udi,
+            msg2: msg
         });
 
     }catch(e){

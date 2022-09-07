@@ -1,0 +1,407 @@
+[
+  {
+    "id": "NMP.CRD.200",
+    "template": "SUCCESS",
+    "description": "Se ha realizado correctamente la operación"
+  },
+  {
+    "id": "NMP.CRD.201",
+    "template": "CREATED",
+    "description": "Se ha realizado correctamente la operación"
+  },
+  {
+    "id": "NMP.CRD.204",
+    "template": "NO CONTENT",
+    "description": "Se ha realizado correctamente la operación"
+  },
+  {
+    "id": "NMP.CRD.500",
+    "template": "Internal Server Error - <%= text %>",
+    "description": "Error en el servidor"
+  },
+  {
+    "id": "NMP.CRD.400",
+    "template": "solicitud malformada",
+    "description": "Error en el servidor"
+  },
+  {
+    "id": "NMP.CRD.409",
+    "template": "Conflict - <%= text %>",
+    "description": "Ha ocurrido un conflicto de datos"
+  },
+  {
+    "id": "NMP.CRD.001",
+    "template": "El producto  <%= productId %> no existe.",
+    "description": "El producto que buscas no existe por favor selecciona otro."
+  },
+  {
+    "id": "NMP.CRD.002",
+    "template": "<%= message %>",
+    "description": "Hay errores en la peticion."
+  },
+  {
+    "id": "NMP.CRD.003",
+    "template": "<%= message %>",
+    "description": "Simulación no disponible."
+  },
+  {
+    "id": "NMP.CRD.004",
+    "template": "No se encontró un subproducto para el propósito <%= purpose %>",
+    "description": "No se enontró el subproducto."
+  },
+  {
+    "id": "NMP.CRD.005",
+    "template": "No se encontró préstamo para una frecuencia <%= frequency %> y un plazo <%= period %>",
+    "description": "No se enontró un prestamo acorde a sus necesidades."
+  },
+  {
+    "id": "NMP.CRD.006",
+    "template": "Se encontro una solicitud con la propiedad keyName <%= keyName %> que ya existe",
+    "description": "Ya existe una solicitud con ese keyName intenta con otro."
+  },
+  {
+    "id": "NMP.CRD.007",
+    "template": "Se encontro una solicitud con la propiedad folio <%= folio %> que ya existe",
+    "description": "Ya existe una solicitud con ese folio intenta con otro."
+  },
+  {
+    "id": "NMP.CRD.008",
+    "template": "La solicitud <%= solicitudId %> no fue encontrada",
+    "description": "La solicitud no existe intenta con otro."
+  },
+  {
+    "id": "NMP.CRD.009",
+    "template": "La solicitud <%= solicitudId %> no se encuentra activa",
+    "description": "La solicitud no esta activa intenta con otro."
+  },
+  {
+    "id": "NMP.CRD.010",
+    "template": "El parametro <%= fecha %> no es valido(yyyy-MM-dd'T'HH:mm:ss.SSSZ).",
+    "description": "El parametro fecha no es valido."
+  },
+  {
+    "id": "NMP.CRD.011",
+    "template": "La solicitud <%= folioSolicitud %> ya se encuentra asociada a un contrato de credito.",
+    "description": "La solicitud ya se encuentra asociada aun contrato de credito intenta con otra."
+  },
+  {
+    "id": "NMP.CRD.012",
+    "template": "La propiedad vias_pago es requerida.",
+    "description": "El contrato debe tener por lo menos una via de pago."
+  },
+  {
+    "id": "NMP.CRD.013",
+    "template": "El contrato con el idCredito <%= idCredito %> no fue encontrado.",
+    "description": "El contrato con el idCredito no fue encontrado, intenta con otro."
+  },
+  {
+    "id": "NMP.CRD.014",
+    "template": "El parametro <%= fecha %> no es valido(yyyy-MM-dd).",
+    "description": "El parametro fecha no es valido."
+  },
+  {
+    "id": "NMP.CRD.015",
+    "template": "El estado no es valido.",
+    "description": "El estado no es valido, intenta con otro."
+  },
+  {
+    "id": "NMP.CRD.016",
+    "template": "La solicitud <%= solicitudId %> no tiene asociada la nota <%= notaId %>.",
+    "description": "La nota no corresponde a la solicitud, intenta con otra."
+  },
+  {
+    "id": "NMP.CRD.017",
+    "template": "La nota <%= notaId %> no fue encontrada.",
+    "description": "La nota no fue encontrada, intenta con otra."
+  },
+  {
+    "id": "NMP.CRD.018",
+    "template": "La unidad unidad organizacional <%= unidadOrganizacional %> no existe",
+    "description": "La unidad organizacional no existe"
+  },
+  {
+    "id": "NMP.CRD.019",
+    "template": "<%= message %>",
+    "description": "No se pudo realizar la consulta de buro"
+  },
+  {
+    "id": "NMP.CRD.020",
+    "template": "La solicitud <%= solicitudId %> ha expirado",
+    "description": "La solicitud ha llegado a su vencimiento."
+  },
+  {
+    "id": "NMP.CRD.021",
+    "template": "La solicitud <%= solicitudId %> ya cuenta con expediente",
+    "description": "La solicitud ya cuenta con un expediente"
+  },
+  {
+    "id": "NMP.CRD.022",
+    "template": "La solicitud <%= solicitudId %> no tiene registrada la categoría <%= categoriaId %>",
+    "description": "La categoría no se encuentra dentro del expediente"
+  },
+  {
+    "id": "NMP.CRD.023",
+    "template": "La solicitud <%= solicitudId %> en la categoría <%= categoriaId %> ya cuenta con el archivo <%= archivoId %>",
+    "description": "El archivo ya está dado de alta en la categoría del expediente"
+  },
+  {
+    "id": "NMP.CRD.024",
+    "template": "La solicitud <%= solicitudId %> en la categoría <%= categoriaId %> tiene archivos duplicados",
+    "description": "Los archivos que se están dando de alta estan repetidos"
+  },
+  {
+    "id": "NMP.CRD.025",
+    "template": "El expediente para la solicitud <%= solicitudId %> que desea crear tiene categorías repetidas",
+    "description": "Las categorías que se intentan cargar al expediente se repiten"
+  },
+  {
+    "id": "NMP.CRD.026",
+    "template": "La solicitud <%= solicitudId %> no puede crear un expediente para el producto <%= idProducto %> y subproducto <%= idSubProducto %>",
+    "description": "No se encuentra la configuración para el producto específicado"
+  },
+  {
+    "id": "NMP.CRD.027",
+    "template": "La solicitud <%= solicitudId %> cuenta con una evaluación en curso",
+    "description": "Esta solicitud cuenta con un proceso de evaluación activo"
+  },
+  {
+    "id": "NMP.CRD.501",
+    "template": "<%= message %>",
+    "description": "Error en crear de BP"
+  },
+  {
+    "id": "NMP.CRD.502",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de BP"
+  },
+  {
+    "id": "NMP.CRD.503",
+    "template": "<%= message %>",
+    "description": "Error en crear Contrato"
+  },
+  {
+    "id": "NMP.CRD.504",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de Cotización"
+  },
+  {
+    "id": "NMP.CRD.505",
+    "template": "<%= message %>",
+    "description": "Error en crear Solicitud"
+  },
+  {
+    "id": "NMP.CRD.506",
+    "template": "<%= message %>",
+    "description": "Error en actualizar Solicitud"
+  },
+  {
+    "id": "NMP.CRD.507",
+    "template": "<%= message %>",
+    "description": "Error en actualizar datos parciales en Solicitud"
+  },
+  {
+    "id": "NMP.CRD.508",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de Solicitud por Id"
+  },
+  {
+    "id": "NMP.CRD.509",
+    "template": "<%= message %>",
+    "description": "Error en borrar Solicitud"
+  },
+  {
+    "id": "NMP.CRD.510",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de Solicitudes"
+  },
+  {
+    "id": "NMP.CRD.511",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de Contratos"
+  },
+  {
+    "id": "NMP.CRD.512",
+    "template": "<%= message %>",
+    "description": "Error en la instrumentación de Buro"
+  },
+  {
+    "id": "NMP.CRD.513",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de Buró"
+  },
+  {
+    "id": "NMP.CRD.514",
+    "template": "<%= message %>",
+    "description": "Error en crear Nota de Solicitud"
+  },
+  {
+    "id": "NMP.CRD.515",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de Notas de Solicitud"
+  },
+  {
+    "id": "NMP.CRD.516",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de Nota por Id"
+  },
+  {
+    "id": "NMP.CRD.517",
+    "template": "<%= message %>",
+    "description": "Error en actualizar Nota de Solicitud"
+  },
+  {
+    "id": "NMP.CRD.518",
+    "template": "<%= message %>",
+    "description": "Error en borrar Nota de Solicitud"
+  },
+  {
+    "id": "NMP.CRD.519",
+    "template": "<%= message %>",
+    "description": "Error en la consulta de contratos"
+  },
+  {
+    "id": "NMP.CRD.520",
+    "template": "<%= message %>",
+    "description": "Error en la cadena INTL, no es valida"
+  },
+  {
+    "id": "NMP.CRD.521",
+    "template": "<%= message %>",
+    "description": "Error durante la busqueda de solicitud"
+  },
+  {
+    "id": "NMP.CRD.522",
+    "template": "<%= message %>",
+    "description": "Error durante la creación del expediente"
+  },
+  {
+    "id": "NMP.CRD.523",
+    "template": "<%= message %>",
+    "description": "Error durante la búsqueda del expediente"
+  },
+  {
+    "id": "NMP.CRD.524",
+    "template": "<%= message %>",
+    "description": "Error durante la actualización del expediente"
+  },
+  {
+    "id": "NMP.CRD.525",
+    "template": "<%= message %>",
+    "description": "Error durante búsqueda de las categorías"
+  },
+  {
+    "id": "NMP.CRD.526",
+    "template": "<%= message %>",
+    "description": "Error durante la creación de una categoría"
+  },
+  {
+    "id": "NMP.CRD.527",
+    "template": "<%= message %>",
+    "description": "Error durante búsqueda de categpría por Id"
+  },
+  {
+    "id": "NMP.CRD.528",
+    "template": "<%= message %>",
+    "description": "Error durante la actualización de una categoría"
+  },
+  {
+    "id": "NMP.CRD.529",
+    "template": "<%= message %>",
+    "description": "Error durante la eliminación de la categoría"
+  },
+  {
+    "id": "NMP.CRD.530",
+    "template": "<%= message %>",
+    "description": "Error durante la búsqueda de archivos de la categoría"
+  },
+  {
+    "id": "NMP.CRD.531",
+    "template": "<%= message %>",
+    "description": "Error durante la creación del archivo"
+  },
+  {
+    "id": "NMP.CRD.532",
+    "template": "<%= message %>",
+    "description": "Error durante la búsqueda del archivo"
+  },
+  {
+    "id": "NMP.CRD.533",
+    "template": "<%= message %>",
+    "description": "Error durante la actualización de un archivo"
+  },
+  {
+    "id": "NMP.CRD.534",
+    "template": "<%= message %>",
+    "description": "Error durante eliminación de un archivo"
+  },
+  {
+    "id": "NMP.CRD.535",
+    "template": "<%= message %>",
+    "description": "Error durante la actualización de un archivo"
+  },
+  {
+    "id": "NMP.CRD.536",
+    "template": "<%= message %>",
+    "description": "Error durante la búsqueda de las notas"
+  },
+  {
+    "id": "NMP.CRD.537",
+    "template": "<%= message %>",
+    "description": "Error durante la creación de la evaluación"
+  },
+  {
+    "id": "NMP.CRD.538",
+    "template": "<%= message %>",
+    "description": "Error durante la búsqueda de la evaluación asociada a la solicitud"
+  },
+  {
+    "id": "NMP.CRD.539",
+    "template": "<%= message %>",
+    "description": "Error durante la actualización de la evaluación"
+  },
+  {
+    "id": "NMP.WFW.650",
+    "template": "ERROR",
+    "description": "Error al crear solicitud en workflow"
+  },
+  {
+    "id": "NMP.WFW.601",
+    "template": "SUCCESS",
+    "description": "Solicitud enviada a Workflow"
+  },
+  {
+    "id": "NMP.WFW.651",
+    "template": "<%= message %>",
+    "description": "Error al consultar"
+  },
+  {
+    "id": "NMP.WFW.652",
+    "template": "<%= message %>",
+    "description": "Error en el proceso"
+  },
+  {
+    "id": "NMP.WFW.653",
+    "template": "<%= message %>",
+    "description": "Error sin resultados"
+  },
+  {
+    "id": "NMP.WFW.654",
+    "template": "<%= message %>",
+    "description": "Error en el proceso"
+  },
+  {
+    "id": "NMP.WFW.655",
+    "template": "<%= message %>",
+    "description": "Elemento no coincide"
+  },
+  {
+    "id": "NMP.WFW.656",
+    "template": "<%= message %>",
+    "description": "Elemento no encontrado"
+  },
+  {
+    "id": "NMP.CRD.540",
+    "template": "<%= message %>",
+    "description": "Error durante la consulta de catálogo de estados de buró"
+  }
+]

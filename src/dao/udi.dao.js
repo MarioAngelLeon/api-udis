@@ -21,9 +21,18 @@ const deleteUDISPeriods = async ( initPeriod = '2022-08-10', endPeriod = '2022-0
     return deletedUdis;
 }
 
-const getUDIByDate = async ( date ) =>{
-    const udi = await UDI.findOne({ where: { fecha: moment(date,'YYYY-MM-DD')} });
+const getUDIByDate = async ( dateParam ) =>{
+
+    let udi = await UDI.findOne({ where: { date: moment(dateParam) } });
     
+    if( !udi ){
+        console.log('Entró')
+        udi = await UDI.findAll({ limit: 1, order: [['date', 'DESC']] });
+        if(udi[0]){
+            udi = udi[0];
+        }
+    }
+    console.log(`UDI date form dao: ${udi.date}`)
     return udi;
 }
 

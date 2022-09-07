@@ -16,7 +16,7 @@ class Server {
 
         //Variables de entorno
         const { PORT } = process.env;
-        this.port =  PORT || 3000;
+        this.port =  PORT || 3001;
 
         //Middlewares para la aplicación
         this.middlewares();
