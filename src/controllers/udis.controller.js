@@ -14,17 +14,20 @@ const udisCreate = async ( req = request, res = response) =>{
         
         LOG.debug('Inicia guardado de udis \n');
         LOG.debug('Entrando al controlador');
+
         const day = getDayFromMoment();
-     
         const { initPeriod, endPeriod } = dateIntervals( day ); 
+
         LOG.debug('Entrando al servicio');
         const response = await UDIService(initPeriod, endPeriod);
         LOG.debug('Terminando consulta de servicio - Empieza desestructuración de respuesta')
+        
         const data = response?.data;
         const { bmx } = data;
         const { series } = bmx;
 
         const { datos } = series[0];
+        
         LOG.debug('Termina desestructuración de respuesta del servicio');
 
         LOG.debug('------------------------------------------------------');
@@ -90,9 +93,9 @@ const udisGet = async (req = request, res = response) =>{
         
         const msg = createMessageDate( dateFounded, date);
 
-        if(!udi){
+        if( typeof msg === 'object' ){
             return res.status(404).json({
-                msg:'UDI not found',
+                msg
             })
         }
 

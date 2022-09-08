@@ -26,13 +26,14 @@ const getUDIByDate = async ( dateParam ) =>{
     let udi = await UDI.findOne({ where: { date: moment(dateParam) } });
     
     if( !udi ){
-        console.log('Entró')
+
         udi = await UDI.findAll({ limit: 1, order: [['date', 'DESC']] });
         if(udi[0]){
             udi = udi[0];
         }
+
     }
-    console.log(`UDI date form dao: ${udi.date}`)
+    
     return udi;
 }
 
