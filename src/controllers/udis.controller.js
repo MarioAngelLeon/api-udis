@@ -6,7 +6,10 @@ import { LOG } from '../commons/logger';
 import { Response } from '../commons/response';
 
 
+
 const customResponse = new Response();
+
+const { createdResponse, internalServerErrorResponse, badRequestException } = customResponse;
 
 const udisCreate = async ( req = request, res = response) =>{
     
@@ -49,10 +52,11 @@ const udisCreate = async ( req = request, res = response) =>{
         LOG.debug('Terminó todo el proceso en el controlador');
         LOG.debug('Finaliza guardado de udis \n');
         
-        customResponse.createdResponse(res, {
-            msg: 'UDIS created succesfully',
+        createdResponse(res, {
+            periodo: {
             from: initPeriod,
             to: endPeriod
+            }
         });
     }catch(error){
     
@@ -61,12 +65,7 @@ const udisCreate = async ( req = request, res = response) =>{
 
         LOG.error(`message error: ${ error }`);
 
-        let data = {
-            status: 500,
-            msg: 'Error con la aplicación, contacte al administrador',
-        };
-
-        customResponse.internalServerErrorResponse( res, data );
+        internalServerErrorResponse(res, error);
         
         LOG.debug('Termina handler error');
         LOG.debug('*********************');
@@ -80,12 +79,6 @@ const udisGet = async (req = request, res = response) =>{
 
         const { date } = req.params;
         
-        if( !date ){
-            return res.status(400).json({
-                msg: 'No date provided'
-            })
-        }
-
         let udi = await getUDIByDate( date );
         
         const dateFounded = udi?.date;
@@ -107,11 +100,9 @@ const udisGet = async (req = request, res = response) =>{
 
     }catch(e){
 
-        console.error('Error in udis.controller.js file in udisGet ', e);
-        res.status(500).json({
-            status: 500,
-            msg: 'Error con la aplicación, contacte al administrador',
-        });
+        LOG.error(`Entrando handler error GET ${e.message}`);
+        internalServerErrorResponse( res, e);
+        LOG.error(`Finaliza handler error GET ${e.message}`);
         
     }
 

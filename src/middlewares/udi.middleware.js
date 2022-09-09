@@ -1,7 +1,12 @@
 import { validator, dateSchema } from '../validator/udi.validator';
+import {  Response } from '../commons/response';
 
+const response = new Response();
+
+const { badRequestException, internalServerErrorResponse } = response;
 
 export const validateDateMiddleware = (req, res, next) =>{
+
     try{
 
         const { date } = req.params;
@@ -11,13 +16,14 @@ export const validateDateMiddleware = (req, res, next) =>{
         const { errors } = validationResult;
 
         if(errors.length != 0 ){
-            return res.status(400).json({
-                msg: `Bad request ${ errors[0]  }`
-            })
+            return badRequestException( res, errors);
         }
 
         next();
     }catch(e){
-        res.status(500).json({ msg: 'Error'});
+        
+        internalServerErrorResponse( res, e);
+
     }
+
 }
