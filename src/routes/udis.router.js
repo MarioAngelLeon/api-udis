@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/:date', [ validateDateMiddleware ] , udisGet);
 
-router.post('/', udisCreate);
+router.post('/create', udisCreate);
 
 
 module.exports = router;

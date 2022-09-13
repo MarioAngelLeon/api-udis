@@ -9,7 +9,7 @@ import { Response } from '../commons/response';
 
 const customResponse = new Response();
 
-const { createdResponse, internalServerErrorResponse, badRequestException } = customResponse;
+const { createdResponse, internalServerErrorResponse, notFoundExceptionResponse, OkResponse } = customResponse;
 
 const udisCreate = async ( req = request, res = response) =>{
     
@@ -54,8 +54,8 @@ const udisCreate = async ( req = request, res = response) =>{
         
         createdResponse(res, {
             periodo: {
-            from: initPeriod,
-            to: endPeriod
+                from: initPeriod,
+                to: endPeriod
             }
         });
     }catch(error){
@@ -87,16 +87,15 @@ const udisGet = async (req = request, res = response) =>{
         const msg = createMessageDate( dateFounded, date);
 
         if( typeof msg === 'object' ){
-            return res.status(404).json({
-                msg
-            })
+            return notFoundExceptionResponse( res, msg );
         }
 
-        res.status(200).json({
-            msg: 'OK',
-            data: udi,
-            msg2: msg
-        });
+
+        const { date: fecha, dato} = udi;
+
+        const responseData = { msg, fecha, dato };
+
+        OkResponse( res, responseData);
 
     }catch(e){
 

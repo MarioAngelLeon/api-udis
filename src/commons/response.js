@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { CODE_CREATED, CODE_INTERNAL_SERVER_ERROR, CODE_BAD_REQUEST, CODE_SUCCESS } from './constants';
+import { CODE_CREATED, CODE_INTERNAL_SERVER_ERROR, CODE_BAD_REQUEST, CODE_SUCCESS, CODE_NOT_FOUND } from './constants';
 import { MESSAGES } from './messages';
 
 export class Response{
@@ -11,7 +11,7 @@ export class Response{
 
         if(CODE_CREATED){
             const { template: status, description: message } = _.get( MESSAGES,CODE_CREATED );
-            info = {status, CODE_CREATED, message };
+            info = {status, code: CODE_CREATED, message };
         }
         
         dataresponse = info ?  {  ...info, ...dataresponse} : dataresponse;
@@ -44,8 +44,17 @@ export class Response{
 
     notFoundExceptionResponse( res, data ){
 
-        let responseNotFound = data || { msg: 'Not Found'}
-        res.status(404).json( responseNotFound );
+        let info = null;
+
+        info = {
+            code: CODE_NOT_FOUND,
+            status: 'NOT FOUND',
+            message: 'No se encontró el recurso solicitado',
+        }
+
+        info = data ? {...info, info: {...data}  } : info;
+
+        res.status(404).json( info );
 
     }
 
@@ -70,21 +79,20 @@ export class Response{
     }
 
     OkResponse( res, data ){
+
         let info = null;
        
         const {  template, description } = _.get( MESSAGES, CODE_SUCCESS);
-
-        const compiled = _.template( template );
         
         info = {
             
-            statusCode: CODE_SUCCESS,
-            message: compiled({ text: 'Bad request' }),
-            description: description
+            code: CODE_SUCCESS,
+            status: template,
+            message: description
             
         };
 
-        res.status(200).json(info);
+        res.status(200).json(data ? { ...data, info } : info);
     }
 
 }

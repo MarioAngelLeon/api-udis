@@ -10,9 +10,9 @@
     },
     "schemes":["http"],
     "host":"localhost:3001",
-    "basePath":"/api/v1/udis/create",
+    "basePath":"/api/v1/udis",
     "paths":{
-        "/":{
+        "/create":{
             "post":{
                 "summary":"Guarda las udis en BD obtenidas desde banxico",
                 "description": "Las udis a guardar, son aquellas que se adaptan bajo el mandato de publicación de los días 10 y 25 de cada mes.",
@@ -48,6 +48,40 @@
                     }
                 }
             }
+        },
+        "/{date}": {
+            "get": {
+              "tags": ["Udi"],
+              "summary": "Obtener udis desde BD",
+              "description": "Metodo para obtener udi desde la BD",
+              "produces": ["application/json"],
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "date",
+                  "description": "Date to search",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "2022-08-26"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "successful operation",
+                  "schema": { "$ref": "#/definitions/getUdi" }
+                },
+                "400": {
+                  "description": "Udi bad request",
+                  "schema": { "$ref": "#/definitions/notValidDate" }
+                },
+                "404": {
+                  "description": "Udi not found",
+                  "schema": { "$ref": "#/definitions/udiNotFound" }
+                }
+              }
+            }
         }
     },
     "definitions":{
@@ -58,6 +92,85 @@
                     "type":"string"
                 }
             }
-        }
+        },
+
+        "getUdi": {
+            "type": "object",
+            "properties": {
+              "msg": {
+                "type": "string",
+                "example": "Udi por fecha encontrada exitosamente"
+              },
+              "fecha": {
+                "type": "string",
+                "example": "26/08/2022"
+              },
+              "dato": {
+                "type": "string",
+                "example": "7.465516"
+              },
+              "info": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "example": "NMP.201"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "CREATED"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Se ha realizado correctamente la operación"
+                  }
+                }
+              }
+            }
+          },
+          "notValidDate": {
+            "type": "object",
+            "properties": {
+              "statusCode": {
+                "type": "string",
+                "example": "NMP.400"
+              },
+              "message": {
+                "type": "string",
+                "example": "solicitud malformada - El campo no tiene el formato date "
+              },
+              "description": {
+                "type": "string",
+                "example": "Error en el servidor"
+              }
+            }
+          },
+
+          "udiNotFound": {
+            "type": "object",
+            "properties": {
+              "statusCode": {
+                "type": "string",
+                "example": "MAMBU.001"
+              },
+              "message": {
+                "type": "object",
+                "properties": {
+                  "msg": {
+                    "type": "string",
+                    "example": "No se encontro el valor para la fecha solicitada"
+                  },
+                  "date": {
+                    "type": "string",
+                    "example": "09/07/2022"
+                  }
+                }
+              },
+              "description": {
+                "type": "string",
+                "example": "Error obtener los valores de las UDIs"
+              }
+            }
+          }
     }
 }

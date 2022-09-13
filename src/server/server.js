@@ -43,7 +43,7 @@ class Server {
 
     routes(){
 
-        this.app.use('/api/v1/udis/create', require('../routes/udis.router'));
+        this.app.use('/api/v1/udis', require('../routes/udis.router'));
 
     }
 
